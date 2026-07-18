@@ -16,7 +16,7 @@ This repository contains a single Jupyter notebook that walks through a neural i
 ## Repository structure
 
 ```
-BetterthenBing/
+better-than-bing/
 ├── XAI_Project.ipynb   # Full pipeline: download, encode, index, search
 ├── CONTRIBUTING.md     # Contribution guidelines
 ├── LICENSE             # MIT License
