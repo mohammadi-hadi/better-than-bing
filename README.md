@@ -1,108 +1,39 @@
-<div align="center">
-
 # BetterThanBing
 
-### Neural Information Retrieval with Semantic Search
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-1.0+-red.svg)](https://pytorch.org/)
-
-*Exploring dense retrieval methods that outperform traditional keyword-based search*
-
----
-
-</div>
+A dense (semantic) retrieval experiment on the BEIR FiQA benchmark using Pyserini, sentence-transformer embeddings, and a FAISS HNSW index.
 
 ## Overview
 
-This project implements semantic search using dense vector representations, demonstrating how neural information retrieval can achieve better results than traditional keyword-based search engines. It uses BEIR benchmarks and Pyserini for efficient retrieval.
+This repository contains a single Jupyter notebook that walks through a neural information retrieval pipeline end to end: downloading a standard IR benchmark, encoding its corpus into dense vectors, building an approximate nearest neighbor index, and answering free-text queries with embedding similarity instead of keyword matching. It was developed as a course project and is written to run on Google Colab with a GPU.
 
-## Features
+## Data / Methods
 
-- **Dense Retrieval**: Embedding-based document search using sentence transformers
-- **BEIR Integration**: Benchmark evaluation on standard IR datasets
-- **FAISS Indexing**: Efficient similarity search with HNSW index
-- **Pyserini**: Industry-standard search toolkit integration
+- **Dataset**: [FiQA](https://sites.google.com/view/fiqa/) (financial question answering), downloaded through the [BEIR](https://github.com/beir-cellar/beir) benchmark utilities and converted to Pyserini's JSONL corpus format.
+- **Encoder**: `microsoft/xtremedistil-l6-h256-uncased` (256-dimensional embeddings), run via `pyserini.encode` with the sentence-transformers encoder class.
+- **Index**: FAISS HNSW index built with `pyserini.index.faiss`.
+- **Search**: `FaissSearcher` with an `AutoQueryEncoder` retrieves the top-scoring documents for natural language queries.
 
-## Technology Stack
-
-- **BEIR**: Heterogeneous benchmark for information retrieval
-- **Pyserini**: Python interface to Lucene and FAISS
-- **Sentence Transformers**: Neural text embeddings
-- **FAISS**: Facebook AI similarity search
-
-## Quick Start
-
-```bash
-# Clone the repository
-git clone https://github.com/mohammadi-hadi/BetterthenBing.git
-cd BetterthenBing
-
-# Install dependencies
-pip install beir pyserini sentence-transformers faiss-gpu
-
-# Open the notebook
-jupyter notebook XAI_Project.ipynb
-```
-
-## Pipeline
-
-### 1. Data Preparation
-Download and process BEIR benchmark datasets (e.g., FiQA financial Q&A).
-
-### 2. Document Encoding
-Generate dense embeddings using sentence transformers:
-```python
-# Using XtremeDistil model for efficient encoding
-encoder: microsoft/xtremedistil-l6-h256-uncased
-```
-
-### 3. Index Building
-Create FAISS HNSW index for fast approximate nearest neighbor search.
-
-### 4. Semantic Search
-Query the index with natural language questions and retrieve relevant documents.
-
-## Example
-
-```python
-from pyserini.search.faiss import AutoQueryEncoder, FaissSearcher
-
-encoder = AutoQueryEncoder('microsoft/xtremedistil-l6-h256-uncased')
-searcher = FaissSearcher(index_dir="fiqa_index", query_encoder=encoder)
-
-hits = searcher.search('what is a lobster roll')
-for i, hit in enumerate(hits[:10]):
-    print(f'{i+1} {hit.docid} {hit.score:.5f}')
-```
-
-## Repository Structure
+## Repository structure
 
 ```
 BetterthenBing/
-├── XAI_Project.ipynb  # Main notebook with implementation
-├── LICENSE            # MIT License
-├── CONTRIBUTING.md    # Contribution guidelines
-└── README.md         # This file
+├── XAI_Project.ipynb   # Full pipeline: download, encode, index, search
+├── CONTRIBUTING.md     # Contribution guidelines
+├── LICENSE             # MIT License
+└── README.md           # This file
 ```
 
-## Requirements
+## How to run
 
-- Python 3.8+
-- beir
-- pyserini
-- sentence-transformers
-- faiss-gpu (or faiss-cpu)
-- tensorflow_text
+The notebook was written for Google Colab (it mounts Google Drive and encodes on `cuda:0`), but runs anywhere with a GPU:
+
+```bash
+pip install beir pyserini tensorflow_text
+jupyter notebook XAI_Project.ipynb
+```
+
+Run the cells in order: corpus preparation, encoding, indexing, then search. Encoding the FiQA corpus is the slow step; a GPU is strongly recommended.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For questions or collaboration inquiries:
-- **Hadi Mohammadi** - Utrecht University
-- **Email**: [h.mohammadi@uu.nl](mailto:h.mohammadi@uu.nl)
-- **Website**: [mohammadi.cv](https://mohammadi.cv)
+Released under the MIT License. See [LICENSE](LICENSE) for details.
