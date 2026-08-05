@@ -2,6 +2,7 @@
 
 # Dense Retrieval on the BEIR FiQA Benchmark
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21803831.svg)](https://doi.org/10.5281/zenodo.21803831)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626.svg)](https://jupyter.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Dataset: BEIR FiQA](https://img.shields.io/badge/Dataset-BEIR%20FiQA-green.svg)](https://github.com/beir-cellar/beir)
