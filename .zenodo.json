@@ -1,0 +1,20 @@
+{
+  "upload_type": "software",
+  "title": "Dense Retrieval on the BEIR FiQA Benchmark",
+  "description": "Dense retrieval on the BEIR FiQA benchmark with Pyserini, sentence-transformer embeddings, and a FAISS HNSW index.",
+  "creators": [
+    {
+      "name": "Mohammadi, Hadi",
+      "orcid": "0000-0003-0860-9200"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "information-retrieval",
+    "dense-retrieval",
+    "beir",
+    "pyserini",
+    "sentence-transformers",
+    "faiss"
+  ]
+}
