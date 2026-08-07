@@ -48,6 +48,22 @@ better-than-bing/
 └── README.md           # This file
 ```
 
+## Citation
+
+If this project is useful in your research, please cite it (see
+[CITATION.cff](CITATION.cff)):
+
+```bibtex
+@software{mohammadi_dense_retrieval_fiqa,
+  author  = {Mohammadi, Hadi},
+  title   = {Dense Retrieval on the BEIR FiQA Benchmark},
+  url     = {https://github.com/mohammadi-hadi/better-than-bing},
+  doi     = {10.5281/zenodo.21803831},
+  version = {1.0.0},
+  year    = {2026}
+}
+```
+
 ## License
 
 This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
